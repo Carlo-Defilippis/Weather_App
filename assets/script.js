@@ -1,22 +1,28 @@
 $(document).ready(function() {
     
-    
-    
+
+    // var loadStorage = localStorage.getItem("myCities")
+    // console.log(JSON.parse(localStorage.getItem("myCities")).length)
+    $(".past").hide()
 
     var myCities = [];
+    var setStorage;
 
     function setPastSeaches(city) {
+        $(".past").show()
         var listSet = $("<li>");
-        listSet.addClass("list-group-item text-center");
+        var past = $("<p>")
+        listSet.attr("type", "button")
+        listSet.addClass("list-group-item text-center btn btn-primary active mt-1 mb-1");
+        past.text("Past Searches")
         listSet.text(city.charAt(0).toUpperCase() + city.slice(1));
-        console.log(city.charAt(0).toUpperCase() + city.slice(1))
-        $(".pastsearch").append(listSet);
+        $(".pastsearch").prepend(listSet);
     }
 
     $(".clearbtn").on("click", function() {
         $(".pastsearch").empty();
         myCities = [];
-        setStorage = localStorage.setItem("myCities", myCities)
+        setStorage = JSON.stringify(localStorage.setItem("myCities", myCities))
     })
 
     $(".searchbtn").on("click", function(event) {
@@ -27,7 +33,7 @@ $(document).ready(function() {
         console.log(searchterm, saveButton)
         console.log(myCities)
         setPastSeaches(searchterm)
-        var setStorage = localStorage.setItem("myCities", myCities)
+        var setStorage = JSON.stringify(localStorage.setItem("myCities", myCities))
         var queryURL = "http://api.openweathermap.org/data/2.5/weather?q="+ searchterm +"&units=imperial&appid=55e5dcb4c374e4d6ed89d06496f57e2a";
         $.ajax({
             url: queryURL,
@@ -61,6 +67,7 @@ $(document).ready(function() {
             $(".cityhere").text(response.name)
             $(".tempfeels").html("Feels like: " + response.main.feels_like.toFixed(1) + '<i class="fas fa-thermometer-half" style="font-size: 12px"></i>')
           });
+          $(".form-control").val("");
       })
 
 
