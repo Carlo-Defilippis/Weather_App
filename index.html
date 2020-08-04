@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="Description" content="Enter your description here"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<title>Title</title>
+</head>
+<body>
+    <!-- Jumbotron -->
+    <div class="jumbotron bg-info">
+        <div class="container">
+          <h1 class="display-4">Weather App</h1>
+          <p class="lead">Search the weather in cities and save them to your local storage!</p>
+        </div>
+      </div>
+      <!-- Card to input city name -->
+      <div class="container">
+          <div class="row">
+      <div class="card col-md-3" style="width: 18rem;">
+        <img src="./assets/sun.png" class="card-img-top" alt="Sun and Clouds" width="200px" length="200px">
+        <div class="card-body">
+          <h5 class="card-title">Weather City Search</h5>
+          <p class="card-text">Type the city name where you want to see the weather to see the weather and add it to your list.</p>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            </div>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="City Name">
+          </div>
+          <a class="btn btn-primary searchbtn" value="searchbtn">Search Weather</a>
+          <a class="btn btn-secondary clearbtn">clear</a>
+        </div>
+      </div>
+      <!-- Card div in row for displaying weather -->
+      <div class="card mb-3 ml-5" style="max-width: 800px;">
+        <div class="row no-gutters">
+          <div class="col-md-9 ml-5">
+            <img src="./assets/weather.png" class="card-img weatherpic" alt="weather picture">
+          </div>
+          <div class="col-md-9">
+            <div class="card-body">
+              <h2 class="card-title text-right cityhere ml-5"></h2>
+              <h1 class="card-title text-right temphere ml-5"></h1>
+              <p class="card-text text-right tempfeels mr-3"><i class="far fa-hand-point-left"></i> Enter any city in the world to see the current weather</p>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+      <div class="container">
+        <div class="row">
+    <div class="col-md-3" style="width: 18rem;">
+        <ul class="list-group pastsearch">
+            <!-- list of past searches saved here -->
+        </ul>
+        </div>
+        </div>
+        </div>
+
+    </div>
+    </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="./assets/script.js"></script>
+</body>
+</html>
