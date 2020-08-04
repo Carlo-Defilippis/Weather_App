@@ -10,22 +10,28 @@
 <link rel="stylesheet" href="assets/style.css">
 <title>Title</title>
 </head>
-<body>
+<body class="back-row-toggle splat-toggle">
+
+    
     <!-- Jumbotron -->
-    <div class="jumbotron bg-info">
+    <div class="jumbotron text-light bg-dark">
         <div class="container">
-          <h1 class="display-4">Weather App</h1>
+          <h1 class="display-4">Weather App <img src="./assets/Sun_with_Cloud_PNG_Clip-Art_Image.png" width="100px" length="100px" alt="sun and clouds"></h1>
           <p class="lead">Search the weather in cities and save them to your local storage!</p>
         </div>
       </div>
+
+      <div class="rain front-row"></div>
+      <div class="rain back-row"></div>
+ 
       <!-- Card to input city name -->
-      <div class="container">
+      <div class="container rounded">
           <div class="row">
-      <div class="card col-md-3" style="width: 18rem; height: 525px">
-        <img src="./assets/sun.png" class="card-img-top" alt="Sun and Clouds" width="200px" length="200px">
+      <div class="card col-md-3" style="width: 20rem; height: 525px">
+        <img src="./assets/sunandclouds.gif" class="card-img-top" alt="Sun and Clouds" width="200px" length="200px">
         <div class="card-body">
-          <h5 class="card-title">Weather City Search</h5>
-          <p class="card-text">Type the city name where you want to see the weather to see the weather and add it to your list.</p>
+          <h5 class="card-title">City Weather Search</h5>
+          <p class="card-text text-decoration-none text-center"></p>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
             </div>
@@ -38,7 +44,7 @@
       <!-- Card div in row for displaying weather -->
       <div class="card mb-3 ml-5" style="max-width: 800px;">
         <div class="row no-gutters">
-          <div class="col-md-9 ml-5">
+          <div class="col-md-9 ml-5 ml-auto">
             <img src="./assets/weather.png" class="card-img weatherpic" alt="weather picture" style="width: 480px;">
           </div>
           <div class="col-md-9">
@@ -50,11 +56,11 @@
           </div>
         </div>
       </div>
-   
+   <!-- List container -->
       <div class="container">
         <div class="row">
     <div class="col-md-3" style="width: 18rem;">
-        <p class="past text-center">Past searches</p>
+        <p class="past text-center mt-1 text-white">Past searches</p>
         <ul class="list-group pastsearch text-center">
             
             <!-- list of past searches saved here -->
@@ -65,11 +71,14 @@
 
     </div>
     </div>
+    </div>
+
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <script src="./assets/script.js"></script>
+<script src="./assets/rain.js"></script>
 </body>
 </html>

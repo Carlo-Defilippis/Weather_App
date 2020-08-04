@@ -5,45 +5,75 @@ $(document).ready(function() {
     // console.log(JSON.parse(localStorage.getItem("myCities")).length)
     $(".past").hide()
 
-    var myCities = [];
-    var setStorage;
+    var myIndex = 0;
+    var getStorage = localStorage.getItem("myCities")
+    var index = 0;
 
+    if (getStorage) {
+        console.log("getStorage is true")
+    var myStorage = getStorage.split(",")
+    } else {
+        var myStorage = [];
+    }
+
+    var myCities = [];
+    
+
+    
+    
+    if (myStorage.length > 0) {
+        for (var i = 0; i < myStorage.length; i++) {
+       myCities.push(myStorage[i])
+        }
+    }
+
+    if (myCities.length > 0) {
+        console.log(myCities.length)
+        for (var i = 0; i < myCities.length; i++) {
+            setPastSeaches(myCities[i].toString())
+            console.log(myCities[i].toString())
+        }
+    }
+
+    // creates button list for past searches
     function setPastSeaches(city) {
         $(".past").show()
         var listSet = $("<li>");
-        var past = $("<p>")
-        listSet.attr("type", "button")
+        listSet.attr("type", "button");
+        listSet.attr("value", myIndex);
         listSet.addClass("list-group-item text-center btn btn-primary active mt-1 mb-1");
-        past.text("Past Searches")
         listSet.text(city.charAt(0).toUpperCase() + city.slice(1));
         $(".pastsearch").prepend(listSet);
+        myIndex++
     }
 
     $(".clearbtn").on("click", function() {
         $(".pastsearch").empty();
         myCities = [];
-        setStorage = JSON.stringify(localStorage.setItem("myCities", myCities))
+        index = 0;
+        setStorage = JSON.stringify(localStorage.setItem(index, myCities));
+        myIndex = 0;
+    })
+
+    $(".pastsearch").on("click", function(event) {
+        event.preventDefault();
+        var buttonSaved = $(this).val()
+        var textValue = $( "li[value="+ myIndex +"]" ).val()
+        console.log(buttonSaved, " is the textvalue, ", myIndex, " is the index")
     })
 
     $(".searchbtn").on("click", function(event) {
         event.preventDefault();
-        var saveButton = $(this).val()
         searchterm = $( "input" ).val().trim().toLowerCase()
         myCities.push(searchterm)
-        console.log(searchterm, saveButton)
-        console.log(myCities)
         setPastSeaches(searchterm)
-        var setStorage = JSON.stringify(localStorage.setItem("myCities", myCities))
+        JSON.stringify(localStorage.setItem("myCities", myCities))
+        index++
         var queryURL = "http://api.openweathermap.org/data/2.5/weather?q="+ searchterm +"&units=imperial&appid=55e5dcb4c374e4d6ed89d06496f57e2a";
         $.ajax({
             url: queryURL,
             method: "GET"
           }).then(function(response) {
-            console.log(response)
-            console.log(response.weather[0].main)
-            console.log(response.weather[0].main.toLowerCase().includes("clear"))
-            console.log(response.main.temp)
-            console.log(response.main.feels_like)
             if (response.weather[0].description.toLowerCase().includes("clear")) {
                 $(".temphere").html("Current Temp: " + response.main.temp.toFixed(1) + '<i class="fas fa-thermometer-half" style="font-size: 30px"></i><img src="assets/clear sky.png" alt="clear skies"></img> <h6 class="text-right mr-4">' + response.weather[0].description + '</h6>')
             } else if (response.weather[0].description.toLowerCase().includes("few")) {
