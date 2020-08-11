@@ -94,7 +94,7 @@ $(document).ready(function() {
         setSearches(searchterm)
         JSON.stringify(localStorage.setItem("myCities", myCities))
         index++
-        var queryURL = "http://api.openweathermap.org/data/2.5/weather?q="+ searchterm +"&units=imperial&appid=55e5dcb4c374e4d6ed89d06496f57e2a";
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q="+ searchterm +"&units=imperial&appid=55e5dcb4c374e4d6ed89d06496f57e2a";
         $.ajax({
             url: queryURL,
             method: "GET"
