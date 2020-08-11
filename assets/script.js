@@ -35,38 +35,63 @@ $(document).ready(function() {
         }
     }
 
+    $(".listButton").on("click", function() {
+        var pastButton = $(this).val();
+        var pastSearchTerm = $(".listButton[value="+ pastButton +"]").text()
+        searchMe(pastSearchTerm)
+    })
+
     // creates button list for past searches
     function setPastSeaches(city) {
         $(".past").show()
         var listSet = $("<li>");
         listSet.attr("type", "button");
         listSet.attr("value", myIndex);
-        listSet.addClass("list-group-item text-center btn btn-primary active mt-1 mb-1");
+        listSet.addClass("listButton list-group-item text-center btn btn-primary active mt-1 mb-1");
         listSet.text(city.charAt(0).toUpperCase() + city.slice(1));
         $(".pastsearch").prepend(listSet);
+        console.log("This is myIndex", myIndex)
         myIndex++
+    }
+
+    function setSearches(city) {
+        $(".past").show()
+        var listSet = $("<li>");
+        listSet.attr("type", "button");
+        listSet.attr("value", myIndex);
+        listSet.addClass("listButton list-group-item text-center btn btn-primary active mt-1 mb-1");
+        listSet.text(city.charAt(0).toUpperCase() + city.slice(1));
+        $(".pastsearch").prepend(listSet);
+        console.log("This is myIndex", myIndex)
     }
 
     $(".clearbtn").on("click", function() {
         $(".pastsearch").empty();
         myCities = [];
         index = 0;
-        setStorage = JSON.stringify(localStorage.setItem(index, myCities));
+        setStorage = JSON.stringify(localStorage.setItem("myCities", myCities));
         myIndex = 0;
     })
 
-    $(".pastsearch").on("click", function(event) {
-        event.preventDefault();
-        var buttonSaved = $(this).val()
-        var textValue = $( "li[value="+ myIndex +"]" ).val()
-        console.log(buttonSaved, " is the textvalue, ", myIndex, " is the index")
-    })
+
+    // $(".pastsearch").on("click", function(event) {
+    //     event.preventDefault();
+    //     var buttonSaved = $(this).val()
+    //     var textValue = $( ".listButton" ).val(buttonSaved)
+    //     console.log(textValue, " is the textvalue, ", myIndex, " is the index")
+    // })
+
+
 
     $(".searchbtn").on("click", function(event) {
         event.preventDefault();
         searchterm = $( "input" ).val().trim().toLowerCase()
+        searchMe(searchterm)
+      })
+
+      function searchMe(searchterm) {
         myCities.push(searchterm)
-        setPastSeaches(searchterm)
+        setSearches(searchterm)
         JSON.stringify(localStorage.setItem("myCities", myCities))
         index++
         var queryURL = "http://api.openweathermap.org/data/2.5/weather?q="+ searchterm +"&units=imperial&appid=55e5dcb4c374e4d6ed89d06496f57e2a";
@@ -98,8 +123,6 @@ $(document).ready(function() {
             $(".tempfeels").html("Feels like: " + response.main.feels_like.toFixed(1) + '<i class="fas fa-thermometer-half" style="font-size: 12px"></i>')
           });
           $(".form-control").val("");
-      })
-
-
+        }
 
 });
